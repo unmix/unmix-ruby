@@ -1,5 +1,5 @@
 require 'open3'
-require "./apps/orginizer_app_base.rb"
+require "./apps/downloader_app_base.rb"
 require "./apps/youtube_full_album.rb"
 
 def cmd_exist?(command)

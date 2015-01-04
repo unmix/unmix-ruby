@@ -14,3 +14,6 @@ gem 'hirb'
 
 # Pretty print your Ruby objects with style -- in full color and with proper indentation
 gem 'awesome_print'
+
+# table_print turns objects into nicely formatted columns for easy reading
+gem "table_print"

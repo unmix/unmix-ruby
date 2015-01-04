@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 require "thor"
 require "pry"
-require "./album_orginizer_helper.rb"
+require "table_print"
+require "./album_downloader_helper.rb"
 
-class AlbumOrginizer < Thor
+class AlbumDownloader < Thor
 
   desc "Youtube", "YouTube Download Procedure"
   long_desc <<-LONGDESC
@@ -26,20 +27,19 @@ class AlbumOrginizer < Thor
     app.prepare
     
     say "Found the following track list:", :green
-    say app.print_tracks + "\n"
+    tp app.tracks, :index, :name, :duration, :start_time, :end_time
 
-    # if no?("Is it correct?", :green) 
-    #   # manuall input
-    #   tracks = []
-    #   say "TODO", :red
-    #   exit!
-    # end
+    if no?("Is it correct?", :green) 
+      # manual input
+      tracks = []
+      say "TODO", :red
+      exit!
+    end
 
-    say "Donwloading: #{app.url}"
+    say "Donwloading: #{app.url}", :green
     app.download
 
     app.cut
-    binding.pry
     return;
 
     app.orginize
@@ -54,4 +54,4 @@ class AlbumOrginizer < Thor
 end
 
 
-AlbumOrginizer.start
+AlbumDownloader.start

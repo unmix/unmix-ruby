@@ -17,6 +17,7 @@ GEM
       pry (>= 0.9.11)
     ruby-youtube-dl (0.0.5)
     slop (3.6.0)
+    table_print (1.5.3)
 
 PLATFORMS
   ruby
@@ -27,3 +28,4 @@ DEPENDENCIES
   pry
   pry-stack_explorer (~> 0.4.9.1)
   ruby-youtube-dl
+  table_print

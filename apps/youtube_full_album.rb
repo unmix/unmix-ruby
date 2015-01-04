@@ -18,11 +18,17 @@ class YouTubeFullAlbumApplication < OrginizerAppBase
     text.gsub(/([\d,:,.,\,'," ])/, '').downcase
   end
 
+  def track_name(text)
+    name = text.gsub(/(\d*:\d*)|(\d*:\d*:\d*)/,'')      # remove mm:ss or hh:mm:ss
+    name = name.gsub(/^\d*(\.|:|\)|\-)*/ ,'')           # remove track numbering
+    name.squeeze(" ")                                   # remove extra spaces
+  end
+
   def cut_command(track)
     cmd = "ffmpeg -y "
     cmd << "-ss #{track[:start_time]} -i #{DOWNLAOD_FILE_PATH} -t #{track[:duration]} "
     cmd << "-vn -c:a copy "
-    cmd << "#{PROCESS_DIRECTORY}/track_#{track[:index]}.m4a"
+    cmd << "#{PROCESS_DIRECTORY}/#{sanitize_filename(track[:index] + '.' + track[:name])}.m4a"
   end  
 
   def analyze_description(text)
@@ -30,7 +36,8 @@ class YouTubeFullAlbumApplication < OrginizerAppBase
     lines.each_with_index do |line, index|
       track = {
         :original_text => line,
-        :index => index+1,
+        :name => track_name(line),
+        :index => (index+1).to_s.rjust(2,'0'),
         :filename => filename(line),
         :start_time => start_time(line)
       }
