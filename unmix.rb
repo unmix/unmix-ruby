@@ -5,6 +5,7 @@ require 'open3'
 require "awesome_print"
 require "table_print"
 require 'securerandom'
+require 'restclient'
 
 # global path configs
 UNMIX_ROOT = File.dirname(__FILE__)

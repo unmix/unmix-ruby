@@ -7,10 +7,17 @@
 ```
 
 Command line tool to: 
-1. Download, 
-2. cut
-3. rename files
-4. move to a 'unmixed' compilation folder on your desktop
+  * Download
+  * Cut
+  * Rename files
+  * Move to a compilation folder on your desktop
+  * Download Album Artwork (WIP!)
+  * Add to iTunes (WIP!)
+
+Supported Sources:
+  * Full Albums on YouTube
+  * Mixcloud mixes
+  * Soundcloud mixes (WIP!)
 
 ## Dependencies
 1. youtube-dl (always latest!)

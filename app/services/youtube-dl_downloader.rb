@@ -20,7 +20,8 @@ module Unmix
     end
 
     def add_best_audio
-      @command << "-f bestaudio "
+      @command << "-f bestaudio " if platform == :youtube
+      @command << "-f 0 " if platform == :mixcloud
     end
 
     def add_url

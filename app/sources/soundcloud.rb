@@ -6,20 +6,20 @@ module Unmix
     attr_accessor :description
     attr_accessor :title  
 
-    def step_1(url)
-      raise "Unimplemented Source base method"
+    def step_1
+      raise "Unimplemented"
     end
 
     def step_2
-      raise "Unimplemented Source base method"
+      raise "Unimplemented"
     end
 
     def step_3
-      raise "Unimplemented Source base method"
+      raise "Unimplemented"
     end
 
     def step_4
-      raise "Unimplemented Source base method"
+      raise "Unimplemented"
     end
 
   end

@@ -11,3 +11,6 @@ gem 'awesome_print'
 
 # table_print turns objects into nicely formatted columns for easy reading
 gem "table_print"
+
+# restclient for external api calls
+gem 'restclient'

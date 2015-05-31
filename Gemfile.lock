@@ -6,8 +6,8 @@ GEM
       debug_inspector (>= 0.0.1)
     coderay (1.1.0)
     debug_inspector (0.0.2)
-    hirb (0.7.2)
     method_source (0.8.2)
+    paint (1.0.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -15,7 +15,8 @@ GEM
     pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    ruby-youtube-dl (0.0.5)
+    restclient (0.11.2)
+      paint (~> 1.0)
     slop (3.6.0)
     table_print (1.5.3)
 
@@ -24,8 +25,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
-  hirb
   pry
   pry-stack_explorer (~> 0.4.9.1)
-  ruby-youtube-dl
+  restclient
   table_print

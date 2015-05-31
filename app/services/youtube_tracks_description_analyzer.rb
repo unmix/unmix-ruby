@@ -1,5 +1,5 @@
 module Unmix
-  class TracksTextAnalyzer
+  class YoutubeTracksDescriptionAnalyzer
 
     attr_accessor :params, :text, :tracks
 
@@ -19,16 +19,6 @@ module Unmix
       text.match(/\d*:((\d|\d\d)|:)*/).to_s
     end
 
-    def set_tracks_end_times
-      tracks.each_with_index do |track, index|
-        if track == tracks.last
-          track[:end_time] = "5:00:00" #stupid, but works for now
-        else
-          track[:end_time] = tracks[index+1][:start_time]
-        end
-      end    
-    end
-
     def set_tracks_basic_info
       lines = text.split("\n").select{ |line| line =~ /\d:\d/ }
       lines.each_with_index do |line, index|
@@ -41,7 +31,16 @@ module Unmix
         }
         tracks << track
       end
+    end
 
+    def set_tracks_end_times
+      tracks.each_with_index do |track, index|
+        if track == tracks.last
+          track[:end_time] = "5:00:00" #stupid, but works for now
+        else
+          track[:end_time] = tracks[index+1][:start_time]
+        end
+      end    
     end
 
     def set_tracks_durations

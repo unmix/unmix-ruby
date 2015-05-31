@@ -1,26 +1,45 @@
 module Unmix
   class Mixcloud < SourceBase
 
-    attr_accessor :tracks
-    attr_accessor :url
-    attr_accessor :description
-    attr_accessor :title  
+    attr_accessor :tracks, :url, :description, :title  
 
-    def step_1(url)
-      raise "Unimplemented Source base method"
+    # learn
+    def step_1
+      @tracks = []
+
+      # fetch critical information from YouTube
+      info = YouTubeDLInfoGetter.new(url: url, title: true, description: true).perform
+      @title       = info[:title]
+      @description = info[:description]
+
+      @tracks = MixcloudTracksAnalyzer.new(url: url).perform
     end
 
+    # download
     def step_2
-      raise "Unimplemented Source base method"
+      success = YouTubeDLDownloader.new(url: url, platform: :mixcloud).perform
+      raise "Error downloading #{url}" unless success
     end
 
+    # cut
     def step_3
-      raise "Unimplemented Source base method"
+      FileUtils.mkdir_p Unmix::export_dir(title)
+      tracks.each do |track|
+        FFmpegFileCutter.new(
+          input: Unmix::temp_download_file_path, 
+          start_time: track[:start_time],
+          duration: track[:duration],
+          output: track[:process_file]
+        ).perform
+      end
     end
 
+    # originate    
     def step_4
-      raise "Unimplemented Source base method"
+      FolderOrginizer.new(
+        tracks: tracks,
+        folder: Unmix::export_dir(title)
+      ).perform
     end
-
   end
 end

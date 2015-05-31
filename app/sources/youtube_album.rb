@@ -1,14 +1,10 @@
 module Unmix
-  class YouTubeFullAlbum < SourceBase
+  class YouTubeAlbum < SourceBase
 
     attr_accessor :tracks, :url, :description, :title  
 
-    def initnialize      
-    end
-
     # learn
-    def step_1(url)
-      @url = url
+    def step_1
       @tracks = []
 
       # fetch critical information from YouTube
@@ -16,13 +12,13 @@ module Unmix
       @title       = info[:title]
       @description = info[:description]
 
-      @tracks = TracksTextAnalyzer.new(text: description).perform
+      @tracks = YoutubeTracksDescriptionAnalyzer.new(text: description).perform
     end
 
     # download
     def step_2
-      # success = YouTubeDLDownloader.new(url: url, platform: "youtube").perform
-      # raise "Error downloading #{url}" unless success
+      success = YouTubeDLDownloader.new(url: url, platform: :youtube).perform
+      raise "Error downloading #{url}" unless success
     end
 
     # cut
