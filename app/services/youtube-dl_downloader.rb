@@ -7,12 +7,17 @@ module Unmix
       @url = params[:url]
       @platform = params[:platform]
 
+      remove_downloaded_file
       @command = "youtube-dl "
 
       add_no_check_certificate
       add_best_audio
       add_url
-      set_output(Unmix::temp_download_file_path)
+      set_output Unmix::temp_download_file_path
+    end
+
+    def remove_downloaded_file
+      FileUtils.rm_rf Unmix::temp_download_file_path
     end
 
     def add_no_check_certificate
