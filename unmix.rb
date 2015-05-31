@@ -10,7 +10,7 @@ require 'restclient'
 # global path configs
 UNMIX_ROOT = File.dirname(__FILE__)
 UNMIX_APP_ROOT = File.join( UNMIX_ROOT, 'app' )
-EXTERNALS_COMMANDS = %i(youtube-dl ffmpeg dudud)
+EXTERNALS_COMMANDS = %i(youtube-dl ffmpeg)
 
 # required application sources
 require "./app/unmix_thor.rb"
