@@ -11,7 +11,7 @@ module Unmix
 
     def auto
       # set up
-      app = Unmix::YouTubeAlbum.new url: options[:input]
+      app = Unmix::YouTubeAlbum.new url: options[:input], platform: "youtube"
       app.run
     end
 
@@ -21,7 +21,7 @@ module Unmix
     LONGDESC
 
     def youtube
-      app = Unmix::YouTubeAlbum.new url: options[:input]
+      app = Unmix::YouTubeAlbum.new url: options[:input], platform: "youtube"
       app.run
     end
 
@@ -31,7 +31,7 @@ module Unmix
     LONGDESC
 
     def mixcloud
-      app = Unmix::Mixcloud.new url: options[:input]
+      app = Unmix::Mixcloud.new url: options[:input], platform: "mixcloud"
       app.run
     end
 

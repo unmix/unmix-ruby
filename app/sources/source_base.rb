@@ -12,14 +12,22 @@ module Unmix
     # original URL that was the source for all of this craziness
     attr_accessor :url
 
+    # the platform unmix is running on
+    attr_accessor :platform
+
     # text that was analyze to generate the track list
     attr_accessor :description
 
     def initialize(params)
+      # options
       @url = params[:url]
+      @platform = params[:platform].to_sym
+
+      # app settings
+      Unmix::set_platform_settings platform
     end
 
-    def step_1(url)
+    def step_1
       raise "Unimplemented Source base method"
     end
 

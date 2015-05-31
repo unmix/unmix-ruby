@@ -20,7 +20,7 @@ module Unmix
           name: section["track"]["artist"]["name"] + " - " + section["track"]["name"],
           index: (index+1).to_s.rjust(2,'0'),
           start_time: section["start_time"],
-          process_file: "#{Unmix.process_dir}/#{SecureRandom.urlsafe_base64(4)}.m4a"
+          process_file: "#{Unmix.process_dir}/#{SecureRandom.urlsafe_base64(4)}.mp3"
         }
         @tracks << track
       end
