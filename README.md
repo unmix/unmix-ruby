@@ -1,21 +1,20 @@
-# Album Downloader
+# Unmix
 
 ## Examples:
 
 ```
-./album_downloader youtube -i https://www.youtube.com/watch?v=o8JvKSyaIyQ
+./unmix [ source type ] -i [ input ] [ output ]
 ```
 
-Will Download, Cut tracks, Rename filenames and will move to a folder on the desktop
-
-## Missing Features
-1. Get Artist and Album name from title
-2. Rename files to track names as specified on page's description
+Command line tool to: 
+1. Download, 
+2. cut
+3. rename files
+4. move to a 'unmixed' compilation folder on your desktop
 
 ## Dependencies
 1. youtube-dl (always latest!)
 2. ffmpeg (v2+)
 
 ## License
-Copyright (c) 2011-2014 GitHub, Inc. See the LICENSE file for license rights and
-limitations (MIT).
+Copyright (c) 2011-2014. See the LICENSE file for license rights and limitations (MIT).
