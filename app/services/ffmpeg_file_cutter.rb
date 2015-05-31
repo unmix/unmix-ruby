@@ -48,7 +48,7 @@ module Unmix
     end
 
     def perform
-      system(command)
+      `#{command} 2>&1 `
     end
   end
 end
