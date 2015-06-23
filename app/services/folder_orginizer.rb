@@ -11,7 +11,7 @@ module Unmix
     def move
       FileUtils.mkdir_p folder
       tracks.each do |track|
-        filename = Unmix::filename_for_track(track[:index], track[:name])
+        filename = Unmix::filename_for_track(track[:index], track[:title])
         FileUtils.mv(track[:process_file], "#{folder}/#{filename}")
       end      
     end
