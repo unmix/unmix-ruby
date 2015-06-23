@@ -1,12 +1,14 @@
-module Unmix
-  class Id3v2FileTagger
+###############################################################################
+# 
+# THIS MODEL IS STILL "WORK IN PROGRESS" WHICH MAY BE NEVER COMPLETED SINCE
+# FFMPEG DOES NOT PROPERLY SUPPORT WRITING MJPEG INTO MP4/M4A CONTAINERS
+# 
+# EG
+#
+###############################################################################
 
-    # the main tracks array
-    # track[:name]            = track's name
-    # track[:index]           = track index number from original text
-    # track[:filename]        = analyzed filename to create for this track
-    # track[:start_time]      = start time of the track
-    # track[:process_file]    = temporary, post cut file
+module Unmix
+  class FFmpegId3v2FileTagger
     attr_accessor :track
     attr_accessor :title
     attr_accessor :artwork_url
@@ -21,7 +23,7 @@ module Unmix
       set_inputfile
       set_artwork unless @track[:artwork].nil?
       set_id3version
-      set_song_name
+      set_title
       set_artist_name
       set_album
       set_album_artist
@@ -42,33 +44,7 @@ module Unmix
     end
 
     def set_artwork
-
-      # 
-      # STILL WORK IN PROGRESS
-      # 
-
-      # Example non-perfect ffmpeg command
-      #####################################
-      # ffmpeg \
-      # -loglevel debug \
-      # -y \
-      # -i "input.m4a" \
-      # -i "art.jpg" \
-      # -c:v copy \
-      # -id3v2_version 4 \
-      # -metadata title="unmix-title" \
-      # -metadata artist="unmix-artist" \
-      # -metadata album="unmix-album" \
-      # -metadata album_artist="unmix-album_artist" \
-      # -metadata genre="unmix-genre" \
-      # -metadata date="2015" \
-      # -metadata track="1/12" \
-      # -c:a copy \
-      # -map 0:0 \
-      # -map 1:0 \
-      # "output_path.m4a"
-
-
+      # WIP COMMAND: ffmpeg -loglevel debug -y -i "input.m4a" -i "art.jpg" -c:v copy -id3v2_version 4 -metadata title="unmix-title" -metadata artist="unmix-artist" -metadata album="unmix-album" -metadata album_artist="unmix-album_artist" -metadata genre="unmix-genre" -metadata date="2015" -metadata track="1/12" -c:a copy -map 0:0 -map 1:0 "output.m4a"
       @did_set_artwork = true
       @command << "-i #{track[:artwork]} -map 0:0 -map 1:0 "
     end
@@ -77,8 +53,8 @@ module Unmix
       @command << "-id3v2_version 4 "
     end
 
-    def set_song_name
-      @command << "-metadata title=\"#{track[:name]}\" "
+    def set_title
+      @command << "-metadata title=\"#{track[:title]}\" "
     end
 
     def set_artist_name
@@ -114,7 +90,6 @@ module Unmix
     end
 
     def perform
-      # binding.pry
     end
 
   end
