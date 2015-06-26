@@ -12,7 +12,7 @@ module Unmix
       @title       = info[:title]
       @description = info[:description]
 
-      @tracks = YoutubeTracksDescriptionAnalyzer.new(text: description).perform
+      @tracks = YouTubeMetaToTracks.new(description: description, title: title).perform
     end
 
     # download
