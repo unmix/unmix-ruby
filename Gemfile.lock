@@ -4,19 +4,44 @@ GEM
     awesome_print (1.2.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    byebug (4.0.5)
+      columnize (= 0.9.0)
     coderay (1.1.0)
+    columnize (0.9.0)
     debug_inspector (0.0.2)
+    diff-lcs (1.2.5)
+    google-search (1.0.3)
+      json
+    json (1.8.3)
     method_source (0.8.2)
     paint (1.0.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.1.0)
+      byebug (~> 4.0)
+      pry (~> 0.10)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     restclient (0.11.2)
       paint (~> 1.0)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+    rspec-core (3.3.1)
+      rspec-support (~> 3.3.0)
+    rspec-expectations (3.3.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-mocks (3.3.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-support (3.3.0)
     slop (3.6.0)
     table_print (1.5.3)
 
@@ -25,7 +50,12 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  byebug
+  google-search
   pry
-  pry-stack_explorer (~> 0.4.9.1)
+  pry-byebug
+  pry-rails
+  pry-stack_explorer
   restclient
+  rspec (>= 3.3)
   table_print

@@ -12,7 +12,7 @@ module Unmix
       @title       = info[:title]
       @description = info[:description]
 
-      @tracks = YoutubeTracksDescriptionAnalyzer.new(text: description).perform
+      @tracks = YouTubeMetaToTracks.new(description: description, title: title).perform
     end
 
     # download
@@ -36,6 +36,12 @@ module Unmix
 
     # originate
     def step_4
+      cover_filepath = GoogleImagesCoverFetcher.new(query: title, min_size: "400").perform
+
+      tracks.each do |track|
+        AtomicparsleyMetadataTags.new({track: track, cover_filepath: cover_filepath}).perform
+      end
+
       FolderOrginizer.new(
         tracks: tracks,
         folder: Unmix::export_dir(title)

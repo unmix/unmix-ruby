@@ -2,7 +2,7 @@ module Unmix
   class SourceBase
 
     # the main tracks array
-    # track[:name]            = track's name
+    # track[:title]           = track's name
     # track[:index]           = track index number from original text
     # track[:filename]        = analyzed filename to create for this track
     # track[:start_time]      = start time of the track
@@ -48,7 +48,7 @@ module Unmix
       step_1
       
       puts "Found the following information:".green
-      tp tracks, :index, :name, :duration, :start_time, :end_time
+      tp tracks, :index, :title, :duration, :start_time, :end_time
       puts ""
 
       # if no?("auto detection enabled. Is this correct or you would like to manually edit it?", :green) 

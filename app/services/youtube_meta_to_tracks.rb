@@ -1,18 +1,19 @@
 module Unmix
-  class YoutubeTracksDescriptionAnalyzer
+  class YouTubeMetaToTracks
 
-    attr_accessor :params, :text, :tracks
+    attr_accessor :params, :youtube_description, :youtube_title, :tracks
 
     def initialize(params = {})
       @params = params
-      @text = params[:text]
+      @youtube_description = params[:description]
+      @youtube_title = params[:title]
       @tracks = []
     end
 
     def track_name(text)
       name = text.gsub(/(\d*:\d*)|(\d*:\d*:\d*)/,'')      # remove mm:ss or hh:mm:ss
       name = name.gsub(/^\d*(\.|:|\)|\-)*/ ,'')           # remove track numbering
-      name.squeeze(" ")                                   # remove extra spaces
+      name = name.gsub(/\-||/ ,'').lstrip!.rstrip!        # remove unwanted chars
     end
 
     def start_time(text)
@@ -20,17 +21,41 @@ module Unmix
     end
 
     def set_tracks_basic_info
-      lines = text.split("\n").select{ |line| line =~ /\d:\d/ }
+      album_title = guess_album_from_title
+      lines = youtube_description.split("\n").select{ |line| line =~ /\d:\d/ }
       lines.each_with_index do |line, index|
         track = {
           original_text: line,
-          name: track_name(line),
           index: (index+1).to_s.rjust(2,'0'),
           start_time: start_time(line),
-          process_file: "#{Unmix.process_dir}/#{SecureRandom.urlsafe_base64(4)}.m4a"
+          process_file: "#{Unmix.process_dir}/#{SecureRandom.urlsafe_base64(4)}.m4a",
+
+          title: track_name(line),
+          artist: guess_artist_from_title,
+          album: guess_album_from_title,
+          artist_album: guess_artist_from_title,
+          genre: "unknown",
+          year: guess_album_year_from_description,
+          track_number: (index+1).to_s.rjust(2,'0').to_i,
+          tracks_count: lines.count
         }
         tracks << track
       end
+    end
+
+    def guess_album_from_title
+      # very very bad guess for now... but we will improve this :)
+      album = youtube_title.split(" ") - ["FULL","Full","full","ALBUM","Album","album"]
+      album.join(" ")
+    end
+
+    def guess_artist_from_title
+      # very very bad guess for now... but we will improve this :)
+      youtube_title[/(?:^|(?:[.!?]\s))(\w+)/,1]
+    end
+
+    def guess_album_year_from_description
+      youtube_description[/19\d\d|20\d\d/]
     end
 
     def set_tracks_end_times

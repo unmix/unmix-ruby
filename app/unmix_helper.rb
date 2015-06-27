@@ -25,7 +25,7 @@ module Unmix
   end
 
   def self.sanitize_filename(filename)
-    filename.gsub!(/[^0-9A-Za-z.\-]/, '_')
+    filename.gsub(/[^0-9a-z\.\- ]/i, '_')
   end
 
   def self.filename_for_track(index, name)
